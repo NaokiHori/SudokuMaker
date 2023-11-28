@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  build-and-run:
+    name: Build library and run executable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+        with:
+          repository: 'NaokiHori/SudokuMaker'
+          ref: ${{ github.ref_name }}
+      - name: Build
+        run: make all
+      - name: Run
+        run: ./a.out ${RANDOM}${RANDOM}
+
